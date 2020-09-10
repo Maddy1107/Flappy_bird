@@ -1,15 +1,17 @@
-import pygame, random
+import pygame
+import random
 
 pygame.init()
 
-display_width = 288
+display_width = 268
 display_height = 512
 
 pipe_width = 50
 gap = 80
 bg = pygame.image.load('bg.png')
+bg1 = pygame.transform.scale(bg, (display_width,display_height))
 base1 = pygame.image.load('base.png')
-# icon = pygame.image.load('icon.ico')
+base2 = pygame.transform.scale(base1, (display_width, 72))
 
 clock = pygame.time.Clock()
 
@@ -52,18 +54,27 @@ class Pipe:
 class Base:
     def __init__(self, x):
         self.x = x
-        self.image = base1
-        self.width = base1.get_width()
+        self.width = base2.get_width()
+        self.x2 = self.width
+        self.image = base2
 
     def move(self):
         self.x -= 5
+        self.x2 -= 5
+
+        if self.x + self.width < 0:
+            self.x = self.x2 + self.width
+
+        if self.x2 + self.width < 0:
+            self.x2 = self.x + self.width
 
     def draw_base(self):
         screen.blit(self.image, (self.x, 450))
+        screen.blit(self.image, (self.x2, 450))
 
 
 def draw_window():
-    screen.blit(bg, (0, 0))
+    screen.blit(bg1, (0, 0))
     base.draw_base()
     bird.draw()
     for pi in pipe:
@@ -99,7 +110,9 @@ while gameStart:
     for r in rem:
         pipe.remove(r)
 
-    # base.move()
+    if base.x2 == 0:
+        base.draw_base()
+    base.move()
 
     draw_window()
     print(pipe)
