@@ -25,6 +25,7 @@ bg1 = pygame.transform.scale(bg, (display_width, display_height))
 base1 = pygame.image.load('assets/base.png')
 base2 = pygame.transform.scale(base1, (display_width, 72))
 start_img = pygame.image.load('assets/start.png')
+over_img = pygame.image.load('assets/gameover.png')
 
 # Screen
 screen = pygame.display.set_mode((display_width, display_height))
