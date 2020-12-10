@@ -6,7 +6,7 @@ def startScreen():
     start = True
     bird = Bird()
     base = Base(450)
-
+#sdfhkgsdkgsdfkvhu
     while start:
         screen.blit(bg1, (0, 0))
         if base.x2 == 0:
